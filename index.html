@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patitas Perdidas</title>
+  <meta name="description" content="Mascotas perdidas y encontradas en la zona oriente de Santiago">
+  <meta name="theme-color" content="#f97316">
+
+  <!-- PWA: datos para instalar la app -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="iconos/icono-192.png">
+  <link rel="apple-touch-icon" href="iconos/apple-touch-icon.png">
+
+  <!-- Mapa (Leaflet) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <!-- Nuestros estilos -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>🐾 Patitas Perdidas</h1>
+    <p>Ayudemos a que vuelvan a casa</p>
+  </header>
+
+  <main>
+    <!-- Mapa -->
+    <div id="mapa"></div>
+
+    <!-- Botón para publicar -->
+    <button id="btnPublicar" class="btn-grande">+ Publicar mascota</button>
+
+    <!-- Filtros -->
+    <div class="filtros">
+      <select id="filtroEstado">
+        <option value="todas">Todas</option>
+        <option value="perdida">Perdidas</option>
+        <option value="encontrada">Encontradas</option>
+      </select>
+      <select id="filtroTipo">
+        <option value="todos">Todos los animales</option>
+        <option value="perro">Perros</option>
+        <option value="gato">Gatos</option>
+        <option value="otro">Otros</option>
+      </select>
+    </div>
+
+    <!-- Lista de publicaciones -->
+    <section id="lista"></section>
+  </main>
+
+  <!-- Formulario (ventana emergente) -->
+  <div id="modal" class="modal oculto">
+    <form id="formulario" class="modal-contenido">
+      <h2>Publicar mascota</h2>
+
+      <label>¿Perdida o encontrada?</label>
+      <select id="estado" required>
+        <option value="perdida">Perdida</option>
+        <option value="encontrada">Encontrada</option>
+      </select>
+
+      <label>Tipo de animal</label>
+      <select id="tipo" required>
+        <option value="perro">Perro</option>
+        <option value="gato">Gato</option>
+        <option value="otro">Otro</option>
+      </select>
+
+      <label>Nombre (si lo sabes)</label>
+      <input type="text" id="nombre" placeholder="Ej: Firulais">
+
+      <label>Descripción</label>
+      <textarea id="descripcion" placeholder="Color, tamaño, collar, dónde se vio..." required></textarea>
+
+      <label>Foto</label>
+      <input type="file" id="foto" accept="image/*">
+
+      <label>Tu WhatsApp</label>
+      <input type="tel" id="whatsapp" placeholder="912345678" required>
+
+      <label>Ubicación: toca el mapa para marcarla</label>
+      <div id="mapaForm"></div>
+
+      <div class="botones">
+        <button type="button" id="btnCancelar" class="btn-secundario">Cancelar</button>
+        <button type="submit" class="btn-grande">Publicar</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- datos.js guarda y lee las publicaciones (hoy localStorage, mañana Supabase) -->
+  <script src="datos.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
